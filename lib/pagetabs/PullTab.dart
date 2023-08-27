@@ -1,46 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:gymapp/Tiles/Pull_Tile.dart';
+import '../Tiles/Pull_Tile.dart';
 
 class PullTab extends StatelessWidget {
-  List pullExercises = [
-    [
-      "Lat PullDown",
-      "4 reps",
-      "12 sets ",
-      "120 lb",
-      Colors.blue,
-      "assets/latpulldown.jpg"
-    ],
-    [
-      "Cable Row  ",
-      "4 reps",
-      "12 sets ",
-      "120 lb",
-      Colors.red,
-      "assets/cablerow.jpg"
-    ],
-    [
-      "Rear Delt Fly",
-      "4 reps",
-      "12 sets ",
-      "150 lb",
-      Colors.yellow,
-      "assets/reardelt.jpg"
-    ],
-    [
-      "Barbell Biceps Curl",
-      "4 reps",
-      "12 sets ",
-      "20 kg",
-      Colors.green,
-      "assets/bar.jpg"
-    ],
-  ];
+  final List<List<dynamic>> pullExercises;
+  final Function(int) toggleFavorite;
+
+  PullTab({required this.pullExercises, required this.toggleFavorite});
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, childAspectRatio: 1 / 1.8),
+        crossAxisCount: 2,
+        childAspectRatio: 1 / 1.8,
+      ),
       itemCount: pullExercises.length,
       itemBuilder: (context, index) {
         return PullTile(
@@ -50,6 +23,8 @@ class PullTab extends StatelessWidget {
           weight: pullExercises[index][3],
           exColor: pullExercises[index][4],
           image: pullExercises[index][5],
+          isFavorite: pullExercises[index][6],
+          onFavoriteToggle: () => toggleFavorite(index),
         );
       },
     );

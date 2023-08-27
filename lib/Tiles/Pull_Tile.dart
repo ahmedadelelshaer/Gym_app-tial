@@ -7,22 +7,28 @@ class PullTile extends StatefulWidget {
   final String weight;
   final exColor;
   final String image;
+  final bool isFavorite; // Add this parameter
+  final VoidCallback onFavoriteToggle; // Add this parameter
 
   const PullTile({
-    super.key,
+    Key? key,
     required this.name,
     required this.reps,
     required this.sets,
     required this.weight,
     required this.exColor,
     required this.image,
-  });
+    required this.isFavorite, // Initialize isFavorite
+    required this.onFavoriteToggle, // Initialize onFavoriteToggle
+  }) : super(key: key);
+
   @override
   State<PullTile> createState() => PullTileState();
 }
 
 class PullTileState extends State<PullTile> {
   int no = 0;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -68,22 +74,26 @@ class PullTileState extends State<PullTile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.favorite,
-                  color: Colors.red,
+                IconButton(
+                  onPressed: widget.onFavoriteToggle, // Toggle favorite status
+                  icon: Icon(
+                    Icons.favorite,
+                    color: widget.isFavorite ? Colors.red : Colors.grey,
+                  ),
                 ),
                 IconButton(
-                    onPressed: () {
-                      setState(() {
-                        no++;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.add,
-                      color: Colors.grey,
-                    ))
+                  onPressed: () {
+                    setState(() {
+                      no++;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.grey,
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

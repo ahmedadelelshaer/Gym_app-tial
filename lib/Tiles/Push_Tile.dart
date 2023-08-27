@@ -7,19 +7,23 @@ class PushTile extends StatefulWidget {
   final String weight;
   final exColor;
   final String image;
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
 
-  const PushTile({
-    Key? key,
-    required this.name,
-    required this.reps,
-    required this.sets,
-    required this.weight,
-    required this.exColor,
-    required this.image,
-  }) : super(key: key);
+  const PushTile(
+      {Key? key,
+      required this.name,
+      required this.reps,
+      required this.sets,
+      required this.weight,
+      required this.exColor,
+      required this.image,
+      required this.isFavorite,
+      required this.onFavoriteToggle})
+      : super(key: key);
 
   @override
-  _PushTileState createState() => _PushTileState();
+  State<PushTile> createState() => _PushTileState();
 }
 
 class _PushTileState extends State<PushTile> {
@@ -67,10 +71,12 @@ class _PushTileState extends State<PushTile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                ),
+                IconButton(
+                    onPressed: widget.onFavoriteToggle,
+                    icon: Icon(
+                      Icons.favorite,
+                      color: widget.isFavorite ? Colors.red : Colors.white,
+                    )),
                 IconButton(
                   onPressed: () {
                     setState(() {
