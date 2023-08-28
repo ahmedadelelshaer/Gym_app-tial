@@ -1,7 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gymapp/screens/favorite_screen.dart';
 
 class NavBar extends StatelessWidget {
+  void signout() {
+    FirebaseAuth.instance.signOut();
+  }
+
+  final user = FirebaseAuth.instance.currentUser;
+
   final List<List<dynamic>> pullExercises;
   final List<List<dynamic>> PushExercises;
   final List<String> favoriteExerciseNames;
@@ -18,7 +25,7 @@ class NavBar extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
               accountName: Text("Ahmed Adel"),
-              accountEmail: Text("Bala7@gmail.com"),
+              accountEmail: Text(user?.email ?? ""),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
                   child: Image.asset(
@@ -32,8 +39,9 @@ class NavBar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.blue,
                 image: DecorationImage(
-                  image: NetworkImage(
-                      "https://w7.pngwing.com/pngs/929/974/png-transparent-blue-stripe-screenshot-blue-sky-daytime-sky-blue-background-blue-angle-other-thumbnail.png"),
+                  image: AssetImage(
+                    "assets/bluesky.png",
+                  ),
                   fit: BoxFit.cover,
                 ),
               )),
@@ -60,9 +68,9 @@ class NavBar extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
+            leading: Icon(Icons.logout),
             title: Text("Log Out"),
-            onTap: () => null,
+            onTap: () => signout(),
           ),
           // ... (other code)
         ],
