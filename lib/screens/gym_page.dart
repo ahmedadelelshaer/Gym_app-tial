@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gymapp/Tabs/tabs.dart';
-import 'package:gymapp/exercies.dart';
-import 'package:gymapp/navbar.dart';
+import 'package:gymapp/constants/exercies.dart';
+import 'package:gymapp/provider/navbar.dart';
 import 'package:gymapp/pagetabs/LegTab.dart';
 import 'package:gymapp/pagetabs/PullTab.dart';
 import 'package:gymapp/pagetabs/PushTab.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class GymPage extends StatefulWidget {
+  const GymPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<GymPage> createState() => _GymPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GymPageState extends State<GymPage> {
   List<Widget> mytabs = [
     Mytabs(
       IconPath: "assets/Pull_Main.jpg",

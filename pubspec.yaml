@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.8.0
   firebase_core: ^2.15.1
+  cloud_firestore: ^4.9.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,7 @@ flutter:
      - assets/bluesky.png
      - assets/applelogo.png
      - assets/googlelogo.jpg
+     - assets/gymlogo2.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

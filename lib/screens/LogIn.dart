@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-import 'package:gymapp/my_buttons.dart';
-import 'package:gymapp/style_square.dart';
+import 'package:gymapp/utilites/dialog.dart/my_buttons.dart';
+import 'package:gymapp/utilites/dialog.dart/style_square.dart';
 import 'package:gymapp/utilites/dialog.dart/dialog.dart';
 
 class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+  final Function()? onTap;
+  const LogIn({super.key, required this.onTap});
 
   @override
   State<LogIn> createState() => _LogInState();
@@ -33,13 +34,13 @@ class _LogInState extends State<LogIn> {
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       if (e.code == 'user-not-found') {
-        dialog(context, "User not found");
+        dialog(context, "User not found", "An error occured");
       } else if (e.code == 'wrong-password') {
-        dialog(context, "Password is incorrect");
+        dialog(context, "Password is incorrect", "An error occured");
       } else if (e.code == 'invalid-email') {
-        dialog(context, "Invalid Email");
+        dialog(context, "Invalid Email", "An error occured");
       } else {
-        print(e.code);
+        dialog(context, e.code.toString(), "An error occured");
       }
     }
   }
@@ -56,9 +57,10 @@ class _LogInState extends State<LogIn> {
                   SizedBox(
                     height: 50,
                   ),
-                  Icon(
-                    Icons.lock,
-                    size: 100,
+                  Image.asset(
+                    "assets/gymlogo2.png",
+                    width: 75,
+                    height: 75,
                   ),
                   SizedBox(
                     height: 50,
@@ -114,7 +116,7 @@ class _LogInState extends State<LogIn> {
                           hintText: "Please type your password"),
                     ),
                   ),
-                  MyButton(onTap: signin),
+                  MyButton(onTap: signin, text: "Sign in"),
                   SizedBox(
                     height: 50,
                   ),
@@ -144,6 +146,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
+                        onTap: widget.onTap, // Use widget.onTap here
                         child: const Text(
                           'Register now',
                           style: TextStyle(

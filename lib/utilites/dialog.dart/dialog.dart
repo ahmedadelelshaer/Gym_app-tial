@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-Future<void> dialog(BuildContext context, String text1) {
+Future<void> dialog(BuildContext context, String text1, String text2) {
   return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("An error happened"),
+          title: Text(text2),
           content: Text(text1),
           actions: [
             TextButton(
