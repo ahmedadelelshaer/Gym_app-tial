@@ -76,16 +76,22 @@ class register_screenState extends State<register_screen> {
     }
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final authResult =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      dialog(context, "User is successfully created", "Congrats!");
+      // Send email verification
+      await authResult.user!.sendEmailVerification();
 
-      addUserDetails(firstName, lastName, age, weight, height);
+      dialog(
+          context,
+          "User is successfully created. Please check your email to verify your account",
+          "Congrats!");
 
-      Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+      // Redirect to the verification page
+      Navigator.of(context).pushReplacementNamed('/verification');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         dialog(context, "Email is already used", "An error occurred");

@@ -4,6 +4,7 @@ import 'package:gymapp/screens/LogIn.dart';
 import 'package:gymapp/screens/auth_screen.dart';
 import 'package:gymapp/screens/gym_page.dart';
 import 'package:gymapp/screens/register.dart';
+import 'package:gymapp/screens/verififcation_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -21,6 +22,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: AuthPage(), routes: {});
+        debugShowCheckedModeBanner: false,
+        home: AuthPage(),
+        routes: {
+          '/verification': (context) => const VerificationPage(),
+          '/gympage': (context) => const GymPage(),
+        });
   }
 }

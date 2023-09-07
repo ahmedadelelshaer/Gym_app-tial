@@ -5,6 +5,7 @@ import 'package:gymapp/screens/favorite_screen.dart';
 class NavBar extends StatelessWidget {
   void signout() {
     FirebaseAuth.instance.signOut();
+    print("object");
   }
 
   final user = FirebaseAuth.instance.currentUser;
